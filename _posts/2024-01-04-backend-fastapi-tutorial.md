@@ -7,6 +7,7 @@ layout: post
   <head>
     <title>fastapi tutorial</title>
     <meta charset="utf-8">
+    <meta name="description" content="fastapi를 이용해 db작업을 하기위한 기초와 관련된 포스팅">
   </head>
 <body>
   <h2>본 글은 bitfumes youtube채널의 fastapi 영상을 follow up 하는 글입니다.</h2>
