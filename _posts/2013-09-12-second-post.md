@@ -3,11 +3,11 @@ title: Second Post
 author: kju
 layout: post
 ---
-
+table 예시
 
 <span class="image right"><img src="{{ 'assets/images/pic03.jpg' | relative_url }}" alt="" /></span>
 
-table 예시
+
 
 <div class="table-wrapper">
   <table>
