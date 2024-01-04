@@ -1,5 +1,3 @@
-
-
 ---
 title: fastapi
 author: kju
