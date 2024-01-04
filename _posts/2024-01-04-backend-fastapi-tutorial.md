@@ -4,6 +4,7 @@ author: kju
 layout: post
 ---
 fastapi basic
+
 <html>
   <head>
     <title>fastapi tutorial</title>
