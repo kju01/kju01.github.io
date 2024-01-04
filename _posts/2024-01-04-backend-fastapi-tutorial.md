@@ -29,6 +29,7 @@ layout: post
         실습과정에서 splite db를 사용함. 이를 위해 tableplus설치가 필요함.
         <br>vscode로 하는 경우 splite viewer 확장프로그램을 설치해야 blog.db를 생성하였을때 database파일로 표시가 됨.
       </li>
+      </ul>
     </li>
     <li>
       00:22:33 break it down
