@@ -33,15 +33,14 @@ layout: post
     </li>
     <li>
       00:22:33 break it down
-      <p>server 활성화 시 터미널에 'uvicorn main:app --reload'로 실행이 가능하다.</p>
+      <p>server 활성화 시 터미널에 <strong>'uvicorn main:app --reload'</strong>로 실행이 가능하다.</p>
     </li>
     <li>
       01:25:37 Create Model and Tables
       <ul>
         <li></li>
         <li>
-        <p>코드 실행 중 발생하는 error</p>
-        <p>
+        <p><strong>코드 실행 중 발생하는 error</strong>
           pipenv를 통해 가상환경을 설정하였을 때 기준<br>
           위의 강의를 듣다가  create model and tables 과정에서 'ImportError: DLL load failed while importing _sqlite3: 시스템에서 파일에 액세스할 수 없습니다.' error가 발생하였다.
           <br>해결방법 : sqlite3.def와 sqlite3.dll 파일을 다운 받은 후 자신의 pipenv 가상환경에 압축을 풀어주면 해결된다.
