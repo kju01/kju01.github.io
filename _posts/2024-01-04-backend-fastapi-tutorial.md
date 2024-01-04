@@ -3,7 +3,6 @@ title: backend-fastapi tutorial
 author: kju
 layout: post
 ---
-fastapi
 <html>
   <head>
     <title>fastapi tutorial</title>
