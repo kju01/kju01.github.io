@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
+
+
 ---
 title: fastapi
 author: kju
 layout: post
 ---
 fastapi
+<html>
   <head>
     <title>fastapi tutorial</title>
     <meta charset="utf-8">
