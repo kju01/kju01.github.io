@@ -8,11 +8,12 @@ layout: post
 date: 2024-01-04
 last_modified_at: 2024-01-16
 
-## fastapi tutorial
+fastapi tutorial
+================
 [강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes
 
 [github](https://github.com/kju01/fastapi_tutorial "fastapi tutorial source code") - 'fastapi tutorial' source code
-### 개발환경과 실습 도중 발생한 이슈
+## 개발환경과 실습 도중 발생한 이슈
 
 영상과 같이 __vscode__ 를 이용하여 진행하였다.
 
@@ -28,41 +29,41 @@ __코드 실행 중 발생하는 error__ 01:25:37 Create Model and Tables
 해결방법 : sqlite3.def와 sqlite3.dll 파일을 다운 받은 후 자신의 pipenv 가상환경에 압축을 풀어주면 해결된다. (소스코드 기준 blog폴더에도 넣어야 실행이 가능했다.)
 Cf. anaconda3를 통해 conda 가상환경을 생성한 경우 anaconda3/DLLs 폴더에 압축을 풀어주면 해결된다고 한다.
 
-### 주요 모듈 소개
+## 주요 모듈 소개
 
-#### fastapi
+### fastapi
 
-- __Depends__
+- __Depends__   
 
-- __status__
-http의 상태를 입력할 수 있는 코드로 ```status.HTTP_204_NO_CONTENT``` 와 같이 넘버링과 함께 그 넘버의 의미가 같이 포함되어 있어 넘버의 의미를 굳이 외울 필요가 없다.
+- __status__   
+   http의 상태를 입력할 수 있는 코드로 ```status.HTTP_204_NO_CONTENT``` 와 같이 넘버링과 함께 그 넘버의 의미가 같이 포함되어 있어 넘버의 의미를 굳이 외울 필요가 없다.
     
-- __HTTPException__
-http 예외처리를 작성해주는 함수로 입력 예시는 ```raise HTTPException(status.HTTP_404_NOT_FOUND, detail=f"(에러 내용)")``` 이다.
+- __HTTPException__    
+  http 예외처리를 작성해주는 함수로 입력 예시는 ```raise HTTPException(status.HTTP_404_NOT_FOUND, detail=f"(에러 내용)")``` 이다.
 
-- __security.OAuth2PasswordBearer__
+- __security.OAuth2PasswordBearer__   
 OAuth2 표준의 비밀번호 인증 플로우를 구현하는데 사용되는 클래스로 이 클래스는 사용자의 아이디와 비밀번호를 받아 인증 토큰을 발급하고, 이를 통해 API에 접근하는 것을 지원한다.
 
-- __FastAPI__
+- __FastAPI__   
 FastAPI 프레임워크에서 API 엔드포인트를 정의하기 위해 사용되는 함수이다.
 서버의 제일 큰 틀이라고 생각하면 될 것같다.
 
-- __APIRouter__
+- __APIRouter__   
 router를 작성하기 위해 필요한 함수로 API 엔드포인트를 그룹화 및 모듈화를 하게 해준다. 이를 통해 API를 역할에 따라 분리하여 저장함으로서 코드를 조직화하고 유지보수하기 쉽게 만드는 역할을 한다.
 tutorial의 경우 user, blog, authentication과 같이 분리하여 router를 정의하였다.
 
-#### pydantic
+### pydantic
 
-- __BaseModel__
+- __BaseModel__   
 schemas를 정의하기위해 사용되는 class이다. 자세한 내용은 schemas.py를 참조
 
-#### uvicorn
+### uvicorn
 
 server를 실행하기 위해 필요한 모듈로 blog폴더에서 터미널을 연 후  ```uvicorn main:app --reload``` 를 입력하면 실행이 된다. 
 여기서 main:app은 FastAPI()가 정의된 py파일에서 FastAPI()를 정의한 변수명과 관련있다. 이 소스코드의 경우 main.py에 app=FastAPI()로 정의되어 있으므로 main:app으로 입력하면 된다.
 --reload의 경우 소스코드를 변경할 때마다 바로바로 반영되게 해준다.
 
-#### sqlalchemy
+### sqlalchemy
 
 - Column
 - Integer
@@ -74,22 +75,22 @@ server를 실행하기 위해 필요한 모듈로 blog폴더에서 터미널을 
 - create_engine
 - orm.Session
 
-#### passlib
+### passlib
 
 - context.CryptContext
 
-#### brypt
+### brypt
 
 - 
 
-#### python-jose
+### python-jose
 
 - JWTError
 - jwt
 
-### 각 py파일 설명(blog 폴더 내 기준)
+## 각 py파일 설명(blog 폴더 내 기준)
 
-#### database.py
+### database.py
 
 ```python
 from sqlalchemy import create_engine
@@ -112,7 +113,7 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False,)
 Base = declarative_base()
 ```
 
-#### hashing.py
+### hashing.py
 
 ```python
 from passlib.context import CryptContext
@@ -127,7 +128,7 @@ class Hash():
       return pwd_cxt.verify(plain_password, hashed_password)
 ```
 
-#### JWTtoken.py
+### JWTtoken.py
 
 ```python
 from datetime import datetime, timedelta
@@ -157,7 +158,7 @@ def verify_token(token:str,credentials_exception):
       raise credentials_exception
 ```
 
-#### models.py
+### models.py
 
 ```python
 from database import Base
@@ -186,7 +187,7 @@ class User(Base):
   blogs = relationship('Blog', back_populates="creator")
 ```
 
-#### oauth2.py
+### oauth2.py
 ```python
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -204,7 +205,7 @@ def get_current_user(data: str = Depends(oauth2_scheme)):
   return JWTtoken.verify_token(data, credentials_exception)
 ```
 
-#### schemas.py
+### schemas.py
 
 ```python
 from pydantic import BaseModel
@@ -249,7 +250,7 @@ class TokenData(BaseModel):
 
 ```
 
-#### routers/authentication.py
+### routers/authentication.py
 ```python
 from fastapi import APIRouter, Depends, HTTPException,status
 from fastapi.security import OAuth2PasswordRequestForm
@@ -275,7 +276,7 @@ def login(request:OAuth2PasswordRequestForm = Depends(), db: Session = Depends(d
   return {"access_token": access_token, "token_type": "bearer"}
 ```
 
-#### routers/blog.py
+### routers/blog.py
 
 ```python
 from fastapi import APIRouter, Depends, status
@@ -313,7 +314,7 @@ def show(id, db: Session = Depends(database.get_db),get_current_user: schemas.Us
 
 ```
 
-#### routers/user.py
+### routers/user.py
 
 ```python
 from fastapi import APIRouter, Depends
@@ -337,7 +338,7 @@ def get_user(id:int, db:Session = Depends(database.get_db)):
   return user.get_user(id,db)
 ```
 
-#### repository/blog.py
+### repository/blog.py
 
 ```python
 from sqlalchemy.orm import Session
@@ -379,7 +380,7 @@ def show(id:int, db: Session = Depends(database.get_db)):
 
 ```
 
-#### repository/user.py
+### repository/user.py
 
 ```python
 from fastapi import Depends, status, HTTPException
