@@ -2,7 +2,6 @@
 title: fastapi tutorial
 author: kju
 layout: post
-#tags: [backend, fastapi, bitfumes]
 ---
 
 date: 2024-01-04
