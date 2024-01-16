@@ -9,10 +9,12 @@ date: 2024-01-04
 last_modified_at: 2024-01-16
 
 # fastapi tutorial
+
 [강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes
 
 [github](https://github.com/kju01/fastapi_tutorial "fastapi tutorial source code") - 'fastapi tutorial' source code
 ### 개발환경과 실습 도중 발생한 이슈
+
 영상과 같이 __vscode__ 를 이용하여 진행하였다.
 
 __pipenv__ 를 통해 가상환경 생성하였다.
