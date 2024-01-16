@@ -35,31 +35,25 @@ Cf. anaconda3를 통해 conda 가상환경을 생성한 경우 anaconda3/DLLs �
 - __Depends__
 
 - __status__
-
 http의 상태를 입력할 수 있는 코드로 ```status.HTTP_204_NO_CONTENT``` 와 같이 넘버링과 함께 그 넘버의 의미가 같이 포함되어 있어 넘버의 의미를 굳이 외울 필요가 없다.
     
 - __HTTPException__
-
 http 예외처리를 작성해주는 함수로 입력 예시는 ```raise HTTPException(status.HTTP_404_NOT_FOUND, detail=f"(에러 내용)")``` 이다.
 
 - __security.OAuth2PasswordBearer__
-
 OAuth2 표준의 비밀번호 인증 플로우를 구현하는데 사용되는 클래스로 이 클래스는 사용자의 아이디와 비밀번호를 받아 인증 토큰을 발급하고, 이를 통해 API에 접근하는 것을 지원한다.
 
 - __FastAPI__
-
 FastAPI 프레임워크에서 API 엔드포인트를 정의하기 위해 사용되는 함수이다.
 서버의 제일 큰 틀이라고 생각하면 될 것같다.
 
 - __APIRouter__
-
 router를 작성하기 위해 필요한 함수로 API 엔드포인트를 그룹화 및 모듈화를 하게 해준다. 이를 통해 API를 역할에 따라 분리하여 저장함으로서 코드를 조직화하고 유지보수하기 쉽게 만드는 역할을 한다.
 tutorial의 경우 user, blog, authentication과 같이 분리하여 router를 정의하였다.
 
 #### pydantic
 
-- BaseModel
-
+- __BaseModel__
 schemas를 정의하기위해 사용되는 class이다. 자세한 내용은 schemas.py를 참조
 
 #### uvicorn
