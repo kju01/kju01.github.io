@@ -5,23 +5,17 @@ layout: post
 ---
 fastapi tutorial
 ================
-[강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes
-
+[강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes   
 [github](https://github.com/kju01/fastapi_tutorial "fastapi tutorial source code") - 'fastapi tutorial' source code
-## 개발환경과 실습 도중 발생한 이슈
-
-영상과 같이 __vscode__ 를 이용하여 진행하였다.
-
-__pipenv__ 를 통해 가상환경 생성하였다.
-
-가상환경내에는 __fastapi, uvicorn, sqlalchemy, passlib, brypt, python-jose__ 모듈이 있어야 한다. 자세한 내용은 github 소스코드에서 Pipfile에 나와있다.
-
-실습과정에서 splite db를 사용함. 이를 위해 tableplus설치하거나 vscode로 하는 경우 splite viewer 확장프로그램을 설치하여 db를 확인할 수도 있다.
-
+## 개발환경과 실습 도중 발생한 이슈   
+영상과 같이 __vscode__ 를 이용하여 진행하였다.   
+__pipenv__ 를 통해 가상환경 생성하였다.   
+가상환경내에는 __fastapi, uvicorn, sqlalchemy, passlib, brypt, python-jose__ 모듈이 있어야 한다. 자세한 내용은 github 소스코드에서 Pipfile에 나와있다.   
+실습과정에서 splite db를 사용함. 이를 위해 tableplus설치하거나 vscode로 하는 경우 splite viewer 확장프로그램을 설치하여 db를 확인할 수도 있다.   
 __코드 실행 중 발생하는 error__ 01:25:37 Create Model and Tables 
-(pipenv를 통해 가상환경을 설정하였을 때 기준)
-위의 강의를 듣다가  create model and tables 과정에서 'ImportError: DLL load failed while importing _sqlite3: 시스템에서 파일에 액세스할 수 없습니다.' error가 발생하였다.
-해결방법 : sqlite3.def와 sqlite3.dll 파일을 다운 받은 후 자신의 pipenv 가상환경에 압축을 풀어주면 해결된다. (소스코드 기준 blog폴더에도 넣어야 실행이 가능했다.)
+(pipenv를 통해 가상환경을 설정하였을 때 기준)   
+위의 강의를 듣다가 create model and tables 과정에서 'ImportError: DLL load failed while importing _sqlite3: 시스템에서 파일에 액세스할 수 없습니다.' error가 발생하였다.   
+해결방법 : sqlite3.def와 sqlite3.dll 파일을 다운 받은 후 자신의 pipenv 가상환경에 압축을 풀어주면 해결된다. (소스코드 기준 blog폴더에도 넣어야 실행이 가능했다.)   
 Cf. anaconda3를 통해 conda 가상환경을 생성한 경우 anaconda3/DLLs 폴더에 압축을 풀어주면 해결된다고 한다.
 
 ## 주요 모듈 소개
@@ -31,18 +25,14 @@ Cf. anaconda3를 통해 conda 가상환경을 생성한 경우 anaconda3/DLLs �
 - __Depends__   
 
 - __status__   
-   http의 상태를 입력할 수 있는 코드로 ```status.HTTP_204_NO_CONTENT``` 와 같이 넘버링과 함께 그 넘버의 의미가 같이 포함되어 있어 넘버의 의미를 굳이 외울 필요가 없다.
-    
+   http의 상태를 입력할 수 있는 코드로 ```status.HTTP_204_NO_CONTENT``` 와 같이 넘버링과 함께 그 넘버의 의미가 같이 포함되어 있어 넘버의 의미를 굳이 외울 필요가 없다.   
 - __HTTPException__    
-  http 예외처리를 작성해주는 함수로 입력 예시는 ```raise HTTPException(status.HTTP_404_NOT_FOUND, detail=f"(에러 내용)")``` 이다.
-
+  http 예외처리를 작성해주는 함수로 입력 예시는 ```raise HTTPException(status.HTTP_404_NOT_FOUND, detail=f"(에러 내용)")``` 이다.   
 - __security.OAuth2PasswordBearer__   
-OAuth2 표준의 비밀번호 인증 플로우를 구현하는데 사용되는 클래스로 이 클래스는 사용자의 아이디와 비밀번호를 받아 인증 토큰을 발급하고, 이를 통해 API에 접근하는 것을 지원한다.
-
+OAuth2 표준의 비밀번호 인증 플로우를 구현하는데 사용되는 클래스로 이 클래스는 사용자의 아이디와 비밀번호를 받아 인증 토큰을 발급하고, 이를 통해 API에 접근하는 것을 지원한다.   
 - __FastAPI__   
 FastAPI 프레임워크에서 API 엔드포인트를 정의하기 위해 사용되는 함수이다.
-서버의 제일 큰 틀이라고 생각하면 될 것같다.
-
+서버의 제일 큰 틀이라고 생각하면 될 것같다.   
 - __APIRouter__   
 router를 작성하기 위해 필요한 함수로 API 엔드포인트를 그룹화 및 모듈화를 하게 해준다. 이를 통해 API를 역할에 따라 분리하여 저장함으로서 코드를 조직화하고 유지보수하기 쉽게 만드는 역할을 한다.
 tutorial의 경우 user, blog, authentication과 같이 분리하여 router를 정의하였다.
@@ -52,14 +42,12 @@ tutorial의 경우 user, blog, authentication과 같이 분리하여 router를 �
 - __BaseModel__   
 schemas를 정의하기위해 사용되는 class이다. 자세한 내용은 schemas.py를 참조
 
-### uvicorn
-
+### uvicorn   
 server를 실행하기 위해 필요한 모듈로 blog폴더에서 터미널을 연 후  ```uvicorn main:app --reload``` 를 입력하면 실행이 된다. 
 여기서 main:app은 FastAPI()가 정의된 py파일에서 FastAPI()를 정의한 변수명과 관련있다. 이 소스코드의 경우 main.py에 app=FastAPI()로 정의되어 있으므로 main:app으로 입력하면 된다.
 --reload의 경우 소스코드를 변경할 때마다 바로바로 반영되게 해준다.
 
-### sqlalchemy
-
+### sqlalchemy   
 - Column
 - Integer
 - String
@@ -70,23 +58,20 @@ server를 실행하기 위해 필요한 모듈로 blog폴더에서 터미널을 
 - create_engine
 - orm.Session
 
-### passlib
-
+### passlib   
 - context.CryptContext
 
 ### brypt
 
 - 
 
-### python-jose
-
+### python-jose   
 - JWTError
 - jwt
 
 ## 각 py파일 설명(blog 폴더 내 기준)
 
-### database.py
-
+### database.py   
 ```python
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
