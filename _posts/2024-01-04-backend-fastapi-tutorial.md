@@ -1,7 +1,7 @@
 ---
 title: fastapi tutorial
 author: kju
-layout: backend
+layout: post
 #tags: [backend, fastapi, bitfumes]
 ---
 
