@@ -1,7 +1,7 @@
 ---
 title: ViT review (예정)
 author: kju
-layout: post
+layout: paper review
 icon: fa-lightbulb
 icon-style: regular
 ---
