@@ -3,10 +3,6 @@ title: fastapi tutorial
 author: kju
 layout: post
 ---
-
-date: 2024-01-04
-last_modified_at: 2024-01-16
-
 fastapi tutorial
 ================
 [강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes
