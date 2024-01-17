@@ -12,7 +12,7 @@ layout: default
 	{%- for category in site.categories -%}
         {%- capture category_name -%}{{ category | first }}{%- endcapture -%}
         {%- assign category_posts = category | last -%}
-        {%- if category_name == "backend" or category_name == "vision" or category_name == "paper" -%}
+        {%- if category_name == "backend" -%}
 			{%- for _post in _posts -%} 
 				{%- capture _title -%}
 					<a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a>
