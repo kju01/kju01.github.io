@@ -8,6 +8,8 @@ order: 2
 {%- include header.html scrolly_nav=_posts -%}
 <!-- Main -->
 <div id="main">
+    {%- if page.content != "" -%}
+		{%- include section.html title=page.title photo=page.cover-photo photo-alt=page.cover-photo-alt auto-header=page.auto-header content=page.content -%}
     <!-- Posts List for Backend -->
     {%- for _post in _posts -%}
         {%- if "backend" in _post.categories -%}
