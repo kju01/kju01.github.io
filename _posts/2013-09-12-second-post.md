@@ -2,6 +2,7 @@
 title: Second Post
 author: kju
 layout: post
+categories:
 ---
 table 예시
 
