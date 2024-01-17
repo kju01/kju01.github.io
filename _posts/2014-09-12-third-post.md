@@ -6,7 +6,7 @@ icon: fa-lightbulb
 icon-style: regular
 categories: 
     - paper review
-    - vision
+    - deep learning (vision)
 
 ---
 vision
