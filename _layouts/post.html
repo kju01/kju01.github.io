@@ -15,4 +15,11 @@ layout: default
 	    {{- content -}}
 	  </div>
 	</article>
+	{% if "backend" in page.categories %}
+        <p>This is a backend post.</p>
+    {% endif %}
+
+    {% if "vision" in page.categories %}
+        <p>This is a vision post.</p>
+    {% endif %}
 </div>
