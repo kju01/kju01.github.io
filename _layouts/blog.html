@@ -2,6 +2,7 @@
 layout: default
 ---
 {%- assign _posts = site.posts | sort: 'date' | reverse -%}
+{%- assign category_posts = _posts | where_exp: 'post', 'post.categories contains page.title' -%}
 {%- include header.html scrolly_nav=_posts -%}
 <!-- Main -->
 <div id="main">
@@ -9,7 +10,7 @@ layout: default
 		{%- include section.html title=page.title photo=page.cover-photo photo-alt=page.cover-photo-alt auto-header=page.auto-header content=page.content -%}
 	{%- endif -%}
 	<!-- Posts List -->
-	{%- for _post in _posts -%} 
+	{%- for _post in category_posts -%} 
 		{%- capture _title -%}
 			<a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a>
 		{%- endcapture -%}
