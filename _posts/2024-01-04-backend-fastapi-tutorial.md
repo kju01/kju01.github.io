@@ -2,6 +2,7 @@
 title: fastapi tutorial
 author: kju
 layout: post
+category: backend
 ---
 fastapi tutorial
 ================
