@@ -4,6 +4,8 @@ title: backend
 icon: fa-solid fa-server
 order: 2
 ---
+{%- assign _posts = site.posts | sort: 'date' | reverse -%}
+{%- include header.html scrolly_nav=_posts -%}
 <!-- Main -->
 <div id="main">
     <!-- Posts List for Backend -->
