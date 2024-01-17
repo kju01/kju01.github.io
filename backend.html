@@ -10,7 +10,7 @@ order: 2
 <div id="main">
     <!-- Posts List for Backend -->
     {%- for _post in _posts -%}
-        {% if "backend" in _post.categories %}
+        {% if "backend" in _categories %}
             <!-- Your HTML structure for Backend category -->
             {%- capture _title -%}
                 <a href="{{- _post.url | absolute_url -}}">{{- _post.title -}}</a>
