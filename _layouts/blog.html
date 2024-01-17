@@ -9,7 +9,7 @@ layout: default
 		{%- include section.html title=page.title photo=page.cover-photo photo-alt=page.cover-photo-alt auto-header=page.auto-header content=page.content -%}
 	{%- endif -%}
 	<!-- Posts List -->
-	{%- for category in site.category -%}
+	{%- for category in site.categories -%}
         {%- capture category_name -%}{{ category | first }}{%- endcapture -%}
         {%- assign category_posts = category | last -%}
         {%- if category_name == "backend" or category_name == "vision" or category_name == "paper" -%}
