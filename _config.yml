@@ -43,7 +43,7 @@ highlighter: rouge
 kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
-    css_class: 'highlight'
+    css_class: 'tango'
     span:
       line_numbers: false
     block:
