@@ -38,8 +38,17 @@ icon: fa-github
 icon-style: solid
 auto-header: use-title
 
+markdown: kramdown
+highlighter: rouge
 kramdown:
   syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    span:
+      line_numbers: false
+    block:
+      line_numbers: true
+      start_line: 1
 description: >- # this means to ignore newlines until "baseurl:"
   This is the demo site for a Jekyll theme version of
   HTML5 UP's sleek, responsive site template Prologue.
