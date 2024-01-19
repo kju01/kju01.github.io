@@ -30,7 +30,7 @@
 # you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: kju blog
+title: bellu blog
 subtitle: vision and backend
 order: 1
 cover-photo : assets/images/banner.jpg
