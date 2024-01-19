@@ -8,7 +8,7 @@ categories: backend
 본 포스팅은 fastapi를 이용하여 blog를 만드는 예제를 통해 fastapi의 기본적인 함수를 알아보는 포스팅입니다.
 
 fastapi basic
-================
+=============
 [강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes   
 [github](https://github.com/kju01/fastapi_tutorial "fastapi tutorial source code") - 'fastapi tutorial' source code
 ## 개발환경과 실습 도중 발생한 이슈   
