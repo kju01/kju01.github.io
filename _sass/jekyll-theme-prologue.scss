@@ -1,6 +1,7 @@
 @import 'libs/vars';
 @import 'libs/functions';
 @import 'libs/mixins';
+@import 'tango.css';
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,300italic,400,600");
 
@@ -160,14 +161,14 @@
 		background: rgba(0, 0, 0, 0.05);
 		border-color: rgba(0, 0, 0, 0.2);
 		border-radius: 4px;
-		font-family: "Courier New", monospace, 'Font Awesome 5 Brands';
+		font-family: "Courier New", monospace;
 		font-size: 0.9em;
 		padding: 0.25em 0.325em;
 	}
 
 	pre {
 		-webkit-overflow-scrolling: touch;
-		font-family: "Courier New", monospace, 'Font Awesome 5 Brands';
+		font-family: "Courier New", monospace;
 		font-size: 0.9em;
 		tab-size: 4;
 		margin: 0 0 2em 0;
