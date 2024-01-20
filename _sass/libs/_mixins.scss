@@ -16,14 +16,14 @@
 			font-family: "Font Awesome 5 Brands";
 		}
 		@else {
-			font-family: "Font Awesome 6 Free";
+			font-family: "Font Awesome 5 Free";
 		}
 
 		@if $style == regular {
 			font-weight: 400;
 		}
 		@else {
-			font-weight: 900;
+			font-weight: 400;
 		}
 
 		display: inline-block;
