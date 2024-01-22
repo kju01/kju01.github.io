@@ -20,10 +20,10 @@
 		}
 
 		@if $style == regular {
-			font-weight: 200;
+			font-weight: 400;
 		}
 		@else {
-			font-weight: 200;
+			font-weight: 900;
 		}
 
 		display: inline-block;
