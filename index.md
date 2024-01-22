@@ -4,6 +4,6 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 title: blog
-icon: fa-solid fa-home
+icon: fa-home
 order: 1
 ---
