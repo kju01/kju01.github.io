@@ -11,9 +11,6 @@
 {%- assign _title = include.title | default: 'Untitled' -%}
 {%- assign _slug = include.title | strip_html | slugify | default: 'untitled' -%}
 
-{%- assign matching_categories = site.posts | where_exp: "post", "post.categories contains _title" -%}
-
-
 {%- if include.photo and include.photo-alt -%}
 	{%- capture _photo -%}
 		<img src="{{- include.photo | relative_url -}}" alt="{{- include.photo-alt -}}" class="back">
@@ -41,12 +38,10 @@
 	{%- endcapture -%}
 {%- endif -%}
 
-{%- if matching_categories.size > 0 -%}
-	<section id="{{- _slug -}}" class="{{- _class -}}">
-	<div class="container">
-		{{- _photo -}}
-		{{- _heading -}}
-		{{- include.content -}}
-	</div>
-	</section>
-{%- endif -%}
+<section id="{{- _slug -}}" class="{{- _class -}}">
+  <div class="container">
+    {{- _photo -}}
+    {{- _heading -}}
+    {{- include.content -}}
+  </div>
+</section>
