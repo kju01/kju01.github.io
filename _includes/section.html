@@ -38,10 +38,12 @@
 	{%- endcapture -%}
 {%- endif -%}
 
-<section id="{{- _slug -}}" class="{{- _class -}}">
-  <div class="container">
-    {{- _photo -}}
-    {{- _heading -}}
-    {{- include.content -}}
-  </div>
-</section>
+{%- if matching_categories.size > 0 -%}
+	<section id="{{- _slug -}}" class="{{- _class -}}">
+	<div class="container">
+		{{- _photo -}}
+		{{- _heading -}}
+		{{- include.content -}}
+	</div>
+	</section>
+{%- endif -%}
