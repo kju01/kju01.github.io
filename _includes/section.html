@@ -11,6 +11,9 @@
 {%- assign _title = include.title | default: 'Untitled' -%}
 {%- assign _slug = include.title | strip_html | slugify | default: 'untitled' -%}
 
+{%- assign matching_categories = site.posts | where_exp: "post", "post.categories contains _title" -%}
+
+
 {%- if include.photo and include.photo-alt -%}
 	{%- capture _photo -%}
 		<img src="{{- include.photo | relative_url -}}" alt="{{- include.photo-alt -}}" class="back">
