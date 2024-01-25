@@ -1,5 +1,5 @@
 ---
-title: fastapi basic
+title: Backend - fastapi basic
 subtitle: 간단한 blog 예제를 통한 fastapi 배워보기
 author: kju
 layout: post
