@@ -26,15 +26,15 @@ Cf. anaconda3를 통해 conda 가상환경을 생성한 경우 anaconda3/DLLs �
 
 ### fastapi
 
-- __Depends__ [-상세정보-](https://fastapi.tiangolo.com/tutorial/dependencies/ "Dependencies")   
+- __Depends__  [-상세정보-](https://fastapi.tiangolo.com/tutorial/dependencies/ "Dependencies")   
 종속성(dependency)를 선언하기 위한 class로 함수를 실행하기 위해 필요한 인수를 정의하기 위해 사용된다.
-- __status__  [-상세정보-](https://fastapi.tiangolo.com/tutorial/response-status-code/ "response status code")
+- __status__  [-상세정보-](https://fastapi.tiangolo.com/tutorial/response-status-code/ "response status code")   
    http의 상태를 입력할 수 있는 코드로 ```status.HTTP_204_NO_CONTENT``` 와 같이 넘버링과 함께 그 넘버의 의미가 같이 포함되어 있어 넘버의 의미를 굳이 외울 필요가 없다.   
 - __HTTPException__ [-상세정보-](https://fastapi.tiangolo.com/tutorial/handling-errors/ "handing errors")   
   http 예외처리를 작성해주는 함수로 입력 예시는 ```raise HTTPException(status.HTTP_404_NOT_FOUND, detail=f"(에러 내용)")``` 이다.   
-- __security.OAuth2PasswordBearer__ [-상세정보-](https://fastapi.tiangolo.com/tutorial/security/first-steps/ "security")
+- __security.OAuth2PasswordBearer__ [-상세정보-](https://fastapi.tiangolo.com/tutorial/security/first-steps/ "security")   
 OAuth2 표준의 비밀번호 인증 플로우를 구현하는데 사용되는 클래스로 이 클래스는 사용자의 아이디와 비밀번호를 받아 인증 토큰을 발급하고, 이를 통해 API에 접근하는 것을 지원한다.   
-- __FastAPI__ [-상세정보-](https://fastapi.tiangolo.com/reference/fastapi/ "FastAPI")
+- __FastAPI__ [-상세정보-](https://fastapi.tiangolo.com/reference/fastapi/ "FastAPI")   
 FastAPI 프레임워크에서 API 엔드포인트를 정의하기 위해 사용되는 함수이다.
 서버의 제일 큰 틀이라고 생각하면 될 것같다.   
 - __APIRouter__ [-상세정보-](https://fastapi.tiangolo.com/reference/apirouter/ "APIRouter")  
@@ -43,11 +43,11 @@ tutorial의 경우 user, blog, authentication과 같이 분리하여 router를 �
 
 ### pydantic
 
-- __BaseModel__ [-상세정보-](https://fastapi.tiangolo.com/tutorial/body/ "Request Body") 
+- __BaseModel__ [-상세정보-](https://fastapi.tiangolo.com/tutorial/body/ "Request Body")    
 Request Body(schemas)를 정의하기위해 사용되는 class이다. 자세한 내용은 schemas.py를 참조
 
 ### uvicorn 
-[-상세정보-](https://fastapi.tiangolo.com/deployment/manually/ "run a server manually - Uvicorn")
+[-상세정보-](https://fastapi.tiangolo.com/deployment/manually/ "run a server manually - Uvicorn")   
 server를 실행하기 위해 필요한 모듈로 blog폴더에서 터미널을 연 후  ```uvicorn main:app --reload``` 를 입력하면 실행이 된다. 
 여기서 main:app은 FastAPI()가 정의된 py파일에서 FastAPI()를 정의한 변수명과 관련있다. 이 소스코드의 경우 main.py에 app=FastAPI()로 정의되어 있으므로 main:app으로 입력하면 된다.
 --reload의 경우 소스코드를 변경할 때마다 바로바로 반영되게 해준다.
