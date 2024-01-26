@@ -1,5 +1,5 @@
 ---
-title: vision [논문리뷰] Learning a Multi-View Stereo Machine
+title: 논문리뷰 - vision - Learning a Multi-View Stereo Machine
 author: kju
 layout: post
 categories:
