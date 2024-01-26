@@ -5,26 +5,34 @@ author: kju
 layout: post
 categories: backend
 ---
-### 본 포스팅은 fastapi 공식문서에서 blog를 만드는 예제를 통해 fastapi의 기본적인 함수를 알아보는 포스팅입니다.
 
 fastapi basic
 =============
+
+### 본 포스팅은 fastapi 공식문서에서 blog를 만드는 예제를 통해 fastapi의 기본적인 함수를 알아보는 포스팅입니다.
+
+
 [강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes   
 [github](https://github.com/kju01/fastapi_tutorial "fastapi tutorial source code") - 'fastapi tutorial' source code
-## 개발환경과 실습 도중 발생한 이슈   
-영상과 같이 __vscode__ 를 이용하여 진행하였다.   
-__pipenv__ 를 통해 가상환경 생성하였다.   
-가상환경내에는 __fastapi, uvicorn, sqlalchemy, passlib, brypt, python-jose__ 모듈이 있어야 한다. 자세한 내용은 github 소스코드에서 Pipfile에 나와있다.   
+## 개발환경과 실습 도중 발생한 이슈    
+ 영상과 같이 __vscode__ 를 이용하여 진행하였다.   
+
+__pipenv__ 를 통해 가상환경 생성하였다.    
+
+가상환경내에는 __fastapi, uvicorn, sqlalchemy, passlib, brypt, python-jose__ 모듈이 있어야 한다. 자세한 내용은 github 소스코드에서 Pipfile에 나와있다.    
+
 실습과정에서 splite db를 사용함. 이를 위해 tableplus설치하거나 vscode로 하는 경우 splite viewer 확장프로그램을 설치하여 db를 확인할 수도 있다.   
-__코드 실행 중 발생하는 error__ 01:25:37 Create Model and Tables 
-(pipenv를 통해 가상환경을 설정하였을 때 기준)   
+
+#### 코드 실행 중 발생하는 error 01:25:37 Create Model and Tables (pipenv를 통해 가상환경을 설정하였을 때 기준)   
 위의 강의를 듣다가 create model and tables 과정에서 'ImportError: DLL load failed while importing _sqlite3: 시스템에서 파일에 액세스할 수 없습니다.' error가 발생하였다.   
+
 해결방법 : sqlite3.def와 sqlite3.dll 파일을 다운 받은 후 자신의 pipenv 가상환경에 압축을 풀어주면 해결된다. (소스코드 기준 blog폴더에도 넣어야 실행이 가능했다.)   
+
 Cf. anaconda3를 통해 conda 가상환경을 생성한 경우 anaconda3/DLLs 폴더에 압축을 풀어주면 해결된다고 한다.
 
 ## 주요 모듈 소개
 
-### fastapi
+### fastapi   
 
 - __Depends__  [-상세정보-](https://fastapi.tiangolo.com/tutorial/dependencies/ "Dependencies")   
 종속성(dependency)를 선언하기 위한 class로 함수를 실행하기 위해 필요한 인수를 정의하기 위해 사용된다.
@@ -41,18 +49,21 @@ FastAPI 프레임워크에서 API 엔드포인트를 정의하기 위해 사용�
 router를 작성하기 위해 필요한 함수로 API 엔드포인트를 그룹화 및 모듈화를 하게 해준다. 이를 통해 API를 역할에 따라 분리하여 저장함으로서 코드를 조직화하고 유지보수하기 쉽게 만드는 역할을 한다.
 tutorial의 경우 user, blog, authentication과 같이 분리하여 router를 정의하였다.
 
-### pydantic
+### pydantic   
 
 - __BaseModel__ [-상세정보-](https://fastapi.tiangolo.com/tutorial/body/ "Request Body")    
 Request Body(schemas)를 정의하기위해 사용되는 class이다. 자세한 내용은 schemas.py를 참조
 
 ### uvicorn 
 [-상세정보-](https://fastapi.tiangolo.com/deployment/manually/ "run a server manually - Uvicorn")   
+
 server를 실행하기 위해 필요한 모듈로 blog폴더에서 터미널을 연 후  ```uvicorn main:app --reload``` 를 입력하면 실행이 된다. 
 여기서 main:app은 FastAPI()가 정의된 py파일에서 FastAPI()를 정의한 변수명과 관련있다. 이 소스코드의 경우 main.py에 app=FastAPI()로 정의되어 있으므로 main:app으로 입력하면 된다.
 --reload의 경우 소스코드를 변경할 때마다 바로바로 반영되게 해준다.
 
-### sqlalchemy [-상세정보-](https://fastapi.tiangolo.com/tutorial/sql-databases/ "SQL (Relational) Databases")  
+### sqlalchemy
+[-상세정보-](https://fastapi.tiangolo.com/tutorial/sql-databases/ "SQL (Relational) Databases")   
+
 - Column
 default값으로 사용되는 값으로 ```id = Column(Integer, primary_key=True)```와 같은 식으로 column을 정의해야한다.
 - Integer, String
@@ -86,9 +97,11 @@ password를 hash, verify(확인)할 때 사용된다. password가 들어오면 �
 - JWTError, jwt
 random한 secret key(token)를 생성하기 위함.
 
-## 각 py파일 설명(blog 폴더 내 기준)
+## 각 py파일 설명(blog 폴더 내 기준)   
 
-### database.py   
+
+### database.py      
+
 ```python
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
@@ -115,7 +128,7 @@ Base = declarative_base()
 [cf. yield를 이용한 dependency 작성](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/ "Dependencies with yield")
 
 
-### hashing.py
+### hashing.py    
 
 ```python
 from passlib.context import CryptContext
@@ -130,7 +143,7 @@ class Hash():
       return pwd_cxt.verify(plain_password, hashed_password) # 검증
 ```
 
-### JWTtoken.py
+### JWTtoken.py    
 
 ```python
 from datetime import datetime, timedelta
@@ -162,7 +175,7 @@ def verify_token(token:str,credentials_exception):
       raise credentials_exception
 ```
 
-### models.py
+### models.py    
 
 ```python
 from database import Base
@@ -191,7 +204,8 @@ class User(Base):
   blogs = relationship('Blog', back_populates="creator")
 ```
 
-### oauth2.py
+### oauth2.py    
+
 ```python
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -210,7 +224,7 @@ def get_current_user(data: str = Depends(oauth2_scheme)):
   return JWTtoken.verify_token(data, credentials_exception)
 ```
 
-### schemas.py
+### schemas.py     
 
 ```python
 from pydantic import BaseModel
@@ -255,7 +269,8 @@ class TokenData(BaseModel):
 
 ```
 
-### routers/authentication.py
+### routers/authentication.py    
+
 ```python
 from fastapi import APIRouter, Depends, HTTPException,status
 from fastapi.security import OAuth2PasswordRequestForm
@@ -282,7 +297,7 @@ def login(request:OAuth2PasswordRequestForm = Depends(), db: Session = Depends(d
   return {"access_token": access_token, "token_type": "bearer"}
 ```
 
-### routers/blog.py
+### routers/blog.py    
 
 ```python
 from fastapi import APIRouter, Depends, status
@@ -322,7 +337,7 @@ def show(id, db: Session = Depends(database.get_db),get_current_user: schemas.Us
 
 ```
 
-### routers/user.py
+### routers/user.py     
 
 ```python
 from fastapi import APIRouter, Depends
@@ -347,7 +362,7 @@ def get_user(id:int, db:Session = Depends(database.get_db)):
   return user.get_user(id,db)
 ```
 
-### repository/blog.py
+### repository/blog.py     
 
 ```python
 from sqlalchemy.orm import Session
@@ -389,7 +404,7 @@ def show(id:int, db: Session = Depends(database.get_db)):
 
 ```
 
-### repository/user.py
+### repository/user.py      
 
 ```python
 from fastapi import Depends, status, HTTPException
