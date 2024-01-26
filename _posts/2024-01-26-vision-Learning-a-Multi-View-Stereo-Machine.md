@@ -6,24 +6,26 @@ layout: post
 categories:
  - deep learning (vision)
 ---
+본 논문은 2D 이미지들을 모아 3D로 복원하는 mutil-view base의 모델에 관한 연구이다.    
+main idea는 1D data를 2D로 복원하는 backprojection을 기반으로 2D data를 3D로 backprojection하는 거를 기존의 3D-R2N2모델에 추가하는 것이다.
 
 [논문 링크](https://arxiv.org/abs/1708.05375, "Learning a Multi-View Stereo Machine")
 
-## Abstract
+## 1. Abstract
 <hr>
 
 
-## Introduction
+## 2. Introduction
 <hr>
 
-## Learnt Stereo Machines
+## 3. Learnt Stereo Machines
 <hr>
 
-## Experiments
+## 4. Experiments
 <hr>
 
-## Discussion
+## 5. Discussion
 <hr>
 
-## summary
+## 6. summary
 <hr>
