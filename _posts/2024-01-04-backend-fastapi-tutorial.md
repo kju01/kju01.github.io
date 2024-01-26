@@ -7,13 +7,15 @@ categories: backend
 ---
 
 ## fastapi basic
+<hr>
 
 본 포스팅은 fastapi 공식문서에서 blog를 만드는 예제를 통해 fastapi의 기본적인 함수를 알아보는 포스팅입니다.
 
 
 [강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes   
 [github](https://github.com/kju01/fastapi_tutorial "fastapi tutorial source code") - 'fastapi tutorial' source code
-## 개발환경과 실습 도중 발생한 이슈    
+## 개발환경과 실습 도중 발생한 이슈
+<hr>    
 
  영상과 같이 __vscode__ 를 이용하여 진행하였다.   
 
@@ -30,10 +32,12 @@ __pipenv__ 를 통해 가상환경 생성하였다.
 
 Cf. anaconda3를 통해 conda 가상환경을 생성한 경우 anaconda3/DLLs 폴더에 압축을 풀어주면 해결된다고 한다.
 
-## 주요 모듈 소개   
+## 주요 모듈 소개
+<hr>   
     
 
 ### fastapi   
+<hr>
 
 - __Depends__  [-상세정보-](https://fastapi.tiangolo.com/tutorial/dependencies/ "Dependencies")   
 종속성(dependency)를 선언하기 위한 class로 함수를 실행하기 위해 필요한 인수를 정의하기 위해 사용된다.
@@ -51,12 +55,14 @@ router를 작성하기 위해 필요한 함수로 API 엔드포인트를 그룹�
 tutorial의 경우 user, blog, authentication과 같이 분리하여 router를 정의하였다.
 
 ### pydantic   
+<hr>
 
 - __BaseModel__ [-상세정보-](https://fastapi.tiangolo.com/tutorial/body/ "Request Body")    
 Request Body(schemas)를 정의하기위해 사용되는 class이다. 자세한 내용은 schemas.py를 참조
 
 ### uvicorn 
 [-상세정보-](https://fastapi.tiangolo.com/deployment/manually/ "run a server manually - Uvicorn")   
+<hr>
 
 server를 실행하기 위해 필요한 모듈로 blog폴더에서 터미널을 연 후  ```uvicorn main:app --reload``` 를 입력하면 실행이 된다. 
 여기서 main:app은 FastAPI()가 정의된 py파일에서 FastAPI()를 정의한 변수명과 관련있다. 이 소스코드의 경우 main.py에 app=FastAPI()로 정의되어 있으므로 main:app으로 입력하면 된다.
@@ -64,6 +70,7 @@ server를 실행하기 위해 필요한 모듈로 blog폴더에서 터미널을 
 
 ### sqlalchemy
 [-상세정보-](https://fastapi.tiangolo.com/tutorial/sql-databases/ "SQL (Relational) Databases")   
+<hr>
 
 - Column
 default값으로 사용되는 값으로 ```id = Column(Integer, primary_key=True)```와 같은 식으로 column을 정의해야한다.
@@ -91,14 +98,17 @@ engine을 정의하기 위한 함수로 저장하기위한 database파일의 경
 db의 매개변수이다.
 
 ### passlib[bcrypt]   
+<hr>
 - context.CryptContext
 password를 hash, verify(확인)할 때 사용된다. password가 들어오면 이를 hashing하고 password가 맞는지 verify하는 역할을 한다.
 
 ### python-jose   
+<hr>
 - JWTError, jwt
 random한 secret key(token)를 생성하기 위함.
 
 ## 각 py파일 설명(blog 폴더 내 기준)   
+<hr>
 
 
 ### database.py      
