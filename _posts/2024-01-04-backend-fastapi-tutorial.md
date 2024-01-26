@@ -5,7 +5,7 @@ author: kju
 layout: post
 categories: backend
 ---
-### 본 포스팅은 fastapi를 이용하여 blog를 만드는 예제를 통해 fastapi의 기본적인 함수를 알아보는 포스팅입니다.
+### 본 포스팅은 fastapi 공식문서에서 blog를 만드는 예제를 통해 fastapi의 기본적인 함수를 알아보는 포스팅입니다.
 
 fastapi basic
 =============
@@ -59,7 +59,7 @@ default값으로 사용되는 값으로 ```id = Column(Integer, primary_key=True
 각 데이터의 형태 중 하나
 - ForeignKey
 model을 서로 연결하기 위한 값
-- orm
+- orm   
 ORM : object-relational mapping
 
 - orm.relationship
@@ -94,13 +94,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
+#db를 얻는 dependency를 작성
 def get_db():
   db = SessionLocal()
   try:
       yield db
   finally:
       db.close()
-      
+
+#db의 형태 정의 및 경로 설정(sqlite, ./blog.db)
 sqlalchemay_database_url = 'sqlite:///./blog.db'
 
 engine = create_engine(sqlalchemay_database_url, connect_args={'check_same_thread': False})
@@ -109,6 +111,9 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False,)
 
 Base = declarative_base()
 ```
+
+[cf. yield를 이용한 dependency 작성](https://fastapi.tiangolo.com/tutorial/dependencies/dependencies-with-yield/ "Dependencies with yield")
+
 
 ### hashing.py
 
@@ -119,10 +124,10 @@ pwd_cxt = CryptContext(schemes=["bcrypt"], deprecated='auto')
 
 class Hash():
   def bcrypt(password: str):
-      return pwd_cxt.hash(password)
+      return pwd_cxt.hash(password) # hashing
   
   def verify(hashed_password, plain_password):
-      return pwd_cxt.verify(plain_password, hashed_password)
+      return pwd_cxt.verify(plain_password, hashed_password) # 검증
 ```
 
 ### JWTtoken.py
@@ -132,11 +137,12 @@ from datetime import datetime, timedelta
 from jose import JWTError, jwt
 import schemas
 
-
+# $ openssl rand -hex 32
 SECRET_KEY =  "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
+# 새로운 엑세스 토큰을 만들기 위한 함수
 def create_access_token(data: dict):
   to_encode = data.copy()
   expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -144,6 +150,7 @@ def create_access_token(data: dict):
   encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
   return encoded_jwt
 
+#token을 받고 확인한 후 user를 반환
 def verify_token(token:str,credentials_exception):
   try:
       payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
@@ -192,6 +199,7 @@ import JWTtoken
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
+# 만약 token이 거부되면 http error 반환, 아니면 token을 확인 후 user반환
 def get_current_user(data: str = Depends(oauth2_scheme)):
   credentials_exception = HTTPException(
       status_code=status.HTTP_401_UNAUTHORIZED,
@@ -214,7 +222,7 @@ class BlogBase(BaseModel):
 
 class Blog(BlogBase):
   class Config():
-      orm_mode = True
+      orm_mode = True # 데이터베이스와의 상호작용 더욱 편리
 
 class User(BaseModel):
   name : str
@@ -259,6 +267,7 @@ router = APIRouter(
     tags=['Authentication']
 )
 
+# user를 확인하기 위한 부분, 만약 확인이 되면 권한을 얻게 됨
 @router.post('/login')
 def login(request:OAuth2PasswordRequestForm = Depends(), db: Session = Depends(database.get_db)):
   user = db.query(models.User).filter(models.User.email == request.username).first()
@@ -286,25 +295,27 @@ router = APIRouter(
     prefix="/blog",
     tags=['blog']
 )
-
+# get : /blog/로 접속시 바로 뜨게 되는 내용들이다.
 @router.get('/', response_model=List[schemas.ShowBlog])
 def all(db : Session = Depends(database.get_db),get_current_user: schemas.User = Depends(oauth2.get_current_user)):`
   return blog.get_all(db)
 
+#blog를 만드는 함수
 @router.post('/' , status_code=status.HTTP_201_CREATED) # status_code에 따라 뜻이 다름, 201 = create fastapi.status에서 뭔지 확인 가능
 def create(request : schemas.Blog, db : Session = Depends(database.get_db),get_current_user: schemas.User = Depends(oauth2.get_current_user)):
   return blog.create(request,db)
   
-
+#blog를 삭제하는 함수
 @router.delete('/{id}',status_code=status.HTTP_204_NO_CONTENT)
 def destroy(id, db : Session = Depends(database.get_db),get_current_user: schemas.User = Depends(oauth2.get_current_user)):
   return blog.destroy(id,db)
   
-
+#blog를 업데이트하는 함수
 @router.put('/{id}',status_code=status.HTTP_202_ACCEPTED)
 def update(id, request: schemas.Blog, db : Session = Depends(database.get_db),get_current_user: schemas.User = Depends(oauth2.get_current_user)):
   return blog.update(id,request,db)
 
+#특정 id의 블로그를 보여준다
 @router.get('/{id}', status_code=200,response_model=schemas.ShowBlog) # in sql, where / schemas로 데이터 불러오는 형태 지정
 def show(id, db: Session = Depends(database.get_db),get_current_user: schemas.User = Depends(oauth2.get_current_user)):
   return blog.show(id,db)
@@ -325,11 +336,12 @@ router = APIRouter(
     tags=['User']
 )
 
-
+#user를 만드는 함수
 @router.post('/', response_model=schemas.ShowUser)
 def create_user(request: schemas.User, db : Session = Depends(database.get_db)):
   return user.create_user(request,db)
 
+#특정 id의 user를 불러오는 함수
 @router.get('/{id}', response_model=schemas.ShowUser)
 def get_user(id:int, db:Session = Depends(database.get_db)):
   return user.get_user(id,db)
@@ -343,34 +355,34 @@ import models, schemas, database
 from fastapi import Depends, status, HTTPException
 
 def get_all(db):
-  blogs = db.query(models.Blog).all()
+  blogs = db.query(models.Blog).all() # blog db에서의 query를 전부 보여준다.
   return blogs
 
 def create(request:schemas.Blog, db : Session = Depends(database.get_db)):
   new_blog = models.Blog(title = request.title, body = request.body, user_id=1)
   db.add(new_blog)
-  db.commit() # db update?
+  db.commit() # db에 반영
   db.refresh(new_blog)
   return new_blog
 
 def destroy(id:int, db:Session = Depends(database.get_db)):
-  blog = db.query(models.Blog).filter(models.Blog.id == id)
-  if not blog.first():
+  blog = db.query(models.Blog).filter(models.Blog.id == id) #삭제하길 원하는 blog의 id 를 통해 접근
+  if not blog.first(): # 삭제하길 원하는 id의 blog가 없다면 error반환
       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Blog with id {id} not found")
   blog.delete(synchronize_session=False)
   db.commit()
   return 'done'
 
 def update(id:int, request:schemas.Blog, db : Session = Depends(database.get_db)):
-  blog = db.query(models.Blog).filter(models.Blog.id == id)
-  if not blog.first():
+  blog = db.query(models.Blog).filter(models.Blog.id == id) # 업데이트하길 원하는 blog의 id를 통해 접근
+  if not blog.first(): # 업데이트하길 원하는 id의 blog가 없다면 error반환
       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Blog with id {id} not found")
   blog.update(request)
   db.commit()
   return 'updated'
 
 def show(id:int, db: Session = Depends(database.get_db)):
-  blog = db.query(models.Blog).filter(models.Blog.id == id).first()
+  blog = db.query(models.Blog).filter(models.Blog.id == id).first() # 보기를 원하는 blog의 id를 통해 접근
   if not blog:
       raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail=f"Blog with the id {id} is not available")
   return blog
@@ -384,6 +396,7 @@ from fastapi import Depends, status, HTTPException
 import schemas, database, models, hashing
 from sqlalchemy.orm import Session
 
+#user 만드는 함수
 def create_user(request: schemas.User, db : Session = Depends(database.get_db)):
   new_user = models.User(name=request.name,email = request.email, password = hashing.Hash.bcrypt(request.password))
   db.add(new_user)
@@ -391,6 +404,7 @@ def create_user(request: schemas.User, db : Session = Depends(database.get_db)):
   db.refresh(new_user)
   return new_user
 
+#user를 불러오는 함수
 def get_user(id:int, db:Session = Depends(database.get_db)):
   user = db.query(models.User).filter(models.User.id == id).first()
   if not user:
