@@ -484,6 +484,8 @@
 		@include icon(before, brands);
 	}
 
+	
+
 /* Header */
 
 	#header {
@@ -569,6 +571,7 @@
 			margin-bottom: 0;
 			hr {
 				margin: auto 3em;
+				padding-left: 50px;
 			}
 
 			li {
