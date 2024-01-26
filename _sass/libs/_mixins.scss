@@ -5,6 +5,7 @@
 @mixin icon($where: before, $style: solid, $content: false) {
 
 	text-decoration: none;
+	margin-right: 5px;
 
 	&::#{$where} {
 
