@@ -6,10 +6,9 @@ layout: post
 categories: backend
 ---
 
-fastapi basic
-=============
+## fastapi basic
 
-### 본 포스팅은 fastapi 공식문서에서 blog를 만드는 예제를 통해 fastapi의 기본적인 함수를 알아보는 포스팅입니다.
+#### 본 포스팅은 fastapi 공식문서에서 blog를 만드는 예제를 통해 fastapi의 기본적인 함수를 알아보는 포스팅입니다.
 
 
 [강의 링크](https://www.youtube.com/watch?v=7t2alSnE2-I&t=1050s "FastAPI - A python framework | Full Course") FastAPI - A python framework | Full Course by bitfumes   
@@ -30,7 +29,8 @@ __pipenv__ 를 통해 가상환경 생성하였다.
 
 Cf. anaconda3를 통해 conda 가상환경을 생성한 경우 anaconda3/DLLs 폴더에 압축을 풀어주면 해결된다고 한다.
 
-## 주요 모듈 소개
+## 주요 모듈 소개   
+    
 
 ### fastapi   
 
