@@ -566,6 +566,13 @@
 	}
 
 	#nav {
+		display:block;
+		transition: opacity 0.3s ease;
+
+		&.hide{
+			opacity: 0;
+			visibility: hidden;
+		}
 		ul {
 			list-style: none;
 			margin-bottom: 0;
@@ -610,6 +617,10 @@
 				}
 			}
 		}
+	}
+
+	#toggleNav {
+		cursor: pointer;
 	}
 
 /* Footer */
