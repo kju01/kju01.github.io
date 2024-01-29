@@ -40,6 +40,9 @@ auto-header: use-title
 
 markdown: kramdown
 highlighter: rouge
+lsi: false
+excerpt_separator: "\n\n"
+incremental: false
 kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
