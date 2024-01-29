@@ -25,7 +25,7 @@ Multi-view stereopsis(MVS)는 주어진 이미지들과 카메라 정보가 있�
 
 ## 3. Learnt Stereo Machines
 <hr>
-![model structure](../post_images/Multi-View-stereo-machine/model-structure.PNG)
+![model structure](/post_images/Multi-View-stereo-machine/model-structure.PNG "LSM 모델 구조")
 
 ## 4. Experiments
 <hr>
