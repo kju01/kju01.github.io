@@ -2,7 +2,9 @@
 layout: default
 ---
 {%- include header.html -%}
-{%- include mathjax_support.html -%}
+{% if page.use_math%}
+	{%- include mathjax_support.html -%}
+{% endif %}
 
 <!-- Main -->
 <div id="main">
