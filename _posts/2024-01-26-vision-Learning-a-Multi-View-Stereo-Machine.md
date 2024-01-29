@@ -7,7 +7,7 @@ categories:
  - deep learning (vision)
 ---
 본 논문은 2D 이미지들을 모아 3D로 복원하는 multi-view base의 모델에 관한 연구이다.    
-main idea는 1D data를 2D로 복원하는 backprojection것과 같이 2D data를 3D로 backprojection하는 부분을 설계함으로서 3D reconstruction을 하는 것이다.
+main idea는 1D data를 2D로 복원하는 unprojection것과 같이 2D data를 3D로 unprojection하는 부분을 설계함으로서 3D reconstruction을 하는 것이다.
 
 [논문 링크](https://arxiv.org/abs/1708.05375, "Learning a Multi-View Stereo Machine")
 
@@ -28,7 +28,28 @@ Multi-view stereopsis(MVS)는 주어진 이미지들과 카메라 정보가 있�
 
 ![model-structure](/post_images/Multi-View-stereo-machine/model-structure.PNG "LSM 모델 구조")   
 
-![backprojection](/post_images/Multi-View-stereo-machine/backprojection.PNG "backprojection")
+먼저 dense features를 image space에서 계산합니다. 그리고 이러한 특징들은 camera pose를 기반으로 matching volume으로 변환됩니다. 이 과정에서 unprojection을 통해 volume으로 변환됩니다. 이 matching volume의 optimum(최적값)dms 3D volume/surface/dispartiy maps의 추정치로 제공됩니다.
+
+본 모델은 figure 1과 같은 과정을 따릅니다. 1) 입력이미지 $\{I_i\}_{i=1}^{n}$는 먼저 image encoder를 통해 처리됩니다. 이는 각 이미지에 대해 하나의 dense feature maps $\{F_i\}_{i=1}^{n}$를 생성합니다  2) 그런 다음 features는 camera pose $\{P_i\}_{i=1}^{n}$ 를 통한 unprojection을 통해 3D feature grids $\{G_i\}_{i=1}^{n}$를 생성합니다. 이 unprojection 작업은 features를 epipola line을 따라 정렬하여 효율적인 local matching이 가능하게 합니다. 3) 이러한 matching은 neural network를 통해 모델링되며 이 network는 unprojection된 grid를 순차적으로 처리하여 local matching costs인 $G^p$를 생성합니다. 이 cost volume은 일반적으로 noisy하므로 이를 smooth하게 처리해야합니다. 4) 이를 위하여 본 논문에서는 feedforward 3d convolution-deconvolution cnn사용을 제안합니다. 이 cnn은 $G^p$는 smoothed 3D grid $G^0$로 변환합니다. 5) 원하는 출력에 따라 최종 grid를 volumetric occupancy map 또는 다시 2d feature maps $\{O_i\}_{i=1}^{n}$로 투영합니다. 이러한 2D maps은 이후 view depth/disparity map과 같은 모양에 대한 view specific representation으로 매핑됩니다.    
+
+본 시스템의 주요 구성 요소는 미분 가능한 projection 및 unprojection 작업입니다. 이러한 과정을 통해 시스템을 end-to-end 학습이 가능하면서도 3D geometry를 metrically하게 정확히 주입하였다고 합니다.     
+
+이 LSM에 대한 변형으로 volume occupancy maps을 생성하는 Voxel LSM, 입력 이미지당 depth map(Depth LSM)을 출력하는 것을 제시하였습니다.
+
+1) 2D Image Encoder
+
+2) Differentiable Unprojection
+
+3) Recurrent Grid Fusion
+
+4) 3D grid Reasoning
+
+5) Differentiable Projection
+
+6) Architecture Details
+
+![unprojection](/post_images/Multi-View-stereo-machine/backprojection.PNG "unprojection")
+
 
 ## 4. Experiments
 <hr>
