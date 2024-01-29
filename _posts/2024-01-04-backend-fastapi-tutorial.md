@@ -26,7 +26,7 @@ __pipenv__ 를 통해 가상환경 생성하였다.
 실습과정에서 splite db를 사용함. 이를 위해 tableplus설치하거나 vscode로 하는 경우 splite viewer 확장프로그램을 설치하여 db를 확인할 수도 있다.   
 
 #### 코드 실행 중 발생하는 error (ImportError: DLL load failed while importing _sqlite3: 시스템에서 파일에 액세스할 수 없습니다)
-#### 영상 기준 - 01:25:37 Create Model and Tables (pipenv를 통해 가상환경을 설정하였을 때 기준)   
+#### 영상 기준 - 01:25:37 Create Model and Tables (pipenv를 통해 가상환경을 설정하였을 때 기준)       
 
 위의 강의를 듣다가 create model and tables 과정에서 ```ImportError: DLL load failed while importing _sqlite3: 시스템에서 파일에 액세스할 수 없습니다.``` error가 발생하였다.   
 
