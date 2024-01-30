@@ -10,7 +10,7 @@ categories:
 본 논문은 2D 이미지들을 모아 3D로 복원하는 multi-view base의 모델에 관한 연구이다.    
 main idea는 1D data를 2D로 복원하는 unprojection것과 같이 2D data를 3D로 unprojection하는 부분을 설계함으로서 3D reconstruction을 하는 것이다.
 
-[논문 링크](https://arxiv.org/abs/1708.05375, "Learning a Multi-View Stereo Machine")
+[-논문 링크-](https://arxiv.org/abs/1708.05375, "Learning a Multi-View Stereo Machine")      [-source code-](https://github.com/akar43/lsm "github code")
 
 ## 1. Abstract
 <hr>
@@ -80,37 +80,35 @@ batch size : 4
 world grid resolution : 32x32x32   
 100k iteration using Adam 
 
-- **Multi-vew Reconstruction on ShapeNet**
-
+- **Multi-vew Reconstruction on ShapeNet**    
 ![experiment1](/post_images/Multi-View-stereo-machine/experiment1.PNG "experiment1")
 
 ![experiment2](/post_images/Multi-View-stereo-machine/experiment2.PNG "experiment2")
 
-table 1에서 왼쪽부터 {1,2,3,4} views로 view가 증가함에 따라 모델의 성능을 비교하였다. **V-LSM(ours)**의 경우 **3D-R2N2 w/pose**에 비해 view가 증가함에 따라 reconstruction이 개선되는 정도가 더욱 큼을 확인할 수 있다. figure 3은 두 모델의 reconstruction 정도를 시각적으로 보여준다. 그리고 **R2N2 w/pose**는 초기에 성능 향상을 보인 후에는 개선이 많이 멈추지만 **V-LSM**의 경우 꾸준히 모델이 개선되는 모습을 보인다. 또한 **V-LSM**은 기하학적 접근을 사용하여 메모리를 적게 사용한다.(appendix 참고)
+**table 1**에서 왼쪽부터 {1,2,3,4} views로 view가 증가함에 따라 모델의 성능을 비교하였다. **V-LSM(ours)**의 경우 **3D-R2N2 w/pose**에 비해 view가 증가함에 따라 reconstruction이 개선되는 정도가 더욱 큼을 확인할 수 있다. figure 3은 두 모델의 reconstruction 정도를 시각적으로 보여준다. 그리고 **R2N2 w/pose**는 초기에 성능 향상을 보인 후에는 개선이 많이 멈추지만 **V-LSM**의 경우 꾸준히 모델이 개선되는 모습을 보인다. 또한 **V-LSM**은 기하학적 접근을 사용하여 메모리를 적게 사용한다.(appendix 참고)
 
 - **Generalzation**   
-
-figure 4는 **LSM**이 얼마나 보이지 않는 데이터에 대해 얼마나 일반화가 되었는지를 보여줍니다. **3D-R2n2 w/pose**의 경우 더 많은 view를 관찰할수록 성능 차이가 그대로이나 **V-LSM**의 경우 성능 차이가 줄어듦을 확인할 수 있습니다. 이를 통해 **V-LSM**의 경우 view에 따른 일반화가 잘 되었다고 확인할 수 있습니다.
+**figure 4**는 **LSM**이 얼마나 보이지 않는 데이터에 대해 얼마나 일반화가 되었는지를 보여줍니다. **3D-R2n2 w/pose**의 경우 더 많은 view를 관찰할수록 성능 차이가 그대로이나 **V-LSM**의 경우 성능 차이가 줄어듦을 확인할 수 있습니다. 이를 통해 **V-LSM**의 경우 view에 따른 일반화가 잘 되었다고 확인할 수 있습니다.
 
 - **Multi-view Depth Map Prediction**   
 
 ![experiment2-2](/post_images/Multi-View-stereo-machine/experiment2-2.PNG "experiment2-2")   
 
-figure 5에서는 Depth LSM의 결과를 보여줍니다. 모든 view에 대해 일관적인 geometry를 예측합니다.
+**figure 5**에서는 **Depth LSM**의 결과를 보여줍니다. 모든 view에 대해 일관적인 geometry를 예측합니다.
 
 - **Comparision to Plane Swepping**   
 
 ![experiment3](/post_images/Multi-View-stereo-machine/experiment3.PNG "experiment3")
 
-figure 6는 view depths maps당 unprojected point clouds를 보여줍니다. PS보다 D-LSM이 더 깨끗한 point clouds를 생성함을 확인할 수 있습니다. (자세한 결과는 appendix를 참고)
+**figure 6**는 view depths maps당 unprojected point clouds를 보여줍니다. PS보다 D-LSM이 더 깨끗한 point clouds를 생성함을 확인할 수 있습니다. (자세한 결과는 appendix를 참고)
 
 
 ## 5. Discussion
 <hr>
 
-- 한계점     
+- **limitation**     
 grid resolution이 ${32^3}$으로 낮습니다.
-- future works   
+- **future works  ** 
 적절한 global grid representation을 찾기위해 더욱 일반적인 기하학을 적용할 예정 (ex) global euclidean grid가 아닌 camera frustum) 
 
 ## 6. summary
