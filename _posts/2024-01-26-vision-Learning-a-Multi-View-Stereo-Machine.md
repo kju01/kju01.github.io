@@ -60,15 +60,22 @@ fused grid ${G^p}$을 모델링한 3D U-Net을 사용하여 사진의 일관성�
 
 ### 6) Architecture Details    
 
-- Voxel LSM(V-LSM)   
-최종 grid ${G^o}$를 3D convolution을 거쳐 softmax연산을 적용하여 확률적인 voxel occupancy map으로 변환합니다. 이를 **ground truth와 voxel occpancy map간의 binary cross entropy loss**를 사용합니다. 최종 출력은 **voxel occupancy grid**입니다.    
-
-- Depth-LSM(D-LSM)    
-먼저 grid ${G^o}$를 2d feature map ${O_i}$로 투영하고, 이를 ray에 따른 reduction function을 학습하기 위해 1x1 convolution을 사용한 후 deconvolution layers를 통해 feature map을 입력이미지의 크기로 upsampling하여 **metric depth maps** ${d_i}$로 변환합니다. train과정에서는 **L1 Loss**를 사용합니다. 또한 이미지 encoder의 초기 layers와 depth maps를 생성하는 마지막 deconvolution layer 사이에 skip connection을 추가하여 이미지의 high frequency정보를 얻을 수 있도록 합니다. 최종 출력은 **input view당 depth map**입니다.
+- **Voxel LSM(V-LSM)**   
+**최종 grid** ${G^o}$를 3D convolution을 거쳐 softmax연산을 적용하여 확률적인 voxel occupancy map으로 변환합니다. 이를 **ground truth와 voxel occpancy map간의 binary cross entropy loss**를 사용합니다. 최종 출력은 **voxel occupancy grid**입니다.    
+ 
+- **Depth-LSM(D-LSM)**      
+먼저 grid ${G^o}$를 **2d feature map** ${O_i}$로 투영하고, 이를 ray에 따른 reduction function을 학습하기 위해 1x1 convolution을 사용한 후 deconvolution layers를 통해 feature map을 입력이미지의 크기로 upsampling하여 **metric depth maps** ${d_i}$로 변환합니다. train과정에서는 **L1 Loss**를 사용합니다. 또한 이미지 encoder의 초기 layers와 depth maps를 생성하는 마지막 deconvolution layer 사이에 skip connection을 추가하여 이미지의 high frequency정보를 얻을 수 있도록 합니다. 최종 출력은 **input view당 depth map**입니다.
 
 
 ## 4. Experiments
 <hr>
+
+![experiment1](/post_images/Multi-View-stereo-machine/experiment1.PNG "experiment1")
+
+![experiment2](/post_images/Multi-View-stereo-machine/experiment2.PNG "experiment2")
+
+![experiment3](/post_images/Multi-View-stereo-machine/experiment3.PNG "experiment3")
+
 
 ## 5. Discussion
 <hr>
