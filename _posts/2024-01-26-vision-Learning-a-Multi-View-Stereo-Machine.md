@@ -70,15 +70,52 @@ fused grid ${G^p}$을 모델링한 3D U-Net을 사용하여 사진의 일관성�
 ## 4. Experiments
 <hr>
 
+- **Dataset and Metrics**    
+모든 실험에서 **ShapeNet** dataset 사용하였다. 그 중에서도 13개의 주요한 categories에 대하여만 실험하였다.(reference [5] 참고) unit cube로 resize된 44k 3D models을 train/val/test[0.7, 0.1, 0.2]로 설정하였다. viewing sphere은 0~360 degree이며 -20~30 degree의 random lighting variation 으로 설정하였다.**voxel resolution** 은 32x32x32 크기로 하였다. V-LSM에서의 **threshold**는 visual hull(0.75)를 제외한 모든 방법에서는 0.4로 설정하고 voxel의 유사도 측정을 위해서는 **intersection over union(IOU)**를 사용하였다. IOU의 경우 class당 평균값이다. 모든 모델은 class agnostic manner 방식으로 학습되었다.
+
+- **Implementation**    
+images : 224x224   
+batch size : 4   
+4 views pre shape   
+world grid resolution : 32x32x32   
+100k iteration using Adam 
+
+- **Multi-vew Reconstruction on ShapeNet**
+
 ![experiment1](/post_images/Multi-View-stereo-machine/experiment1.PNG "experiment1")
 
 ![experiment2](/post_images/Multi-View-stereo-machine/experiment2.PNG "experiment2")
 
+table 1에서 왼쪽부터 {1,2,3,4} views로 view가 증가함에 따라 모델의 성능을 비교하였다. **V-LSM(ours)**의 경우 **3D-R2N2 w/pose**에 비해 view가 증가함에 따라 reconstruction이 개선되는 정도가 더욱 큼을 확인할 수 있다. figure 3은 두 모델의 reconstruction 정도를 시각적으로 보여준다. 그리고 **R2N2 w/pose**는 초기에 성능 향상을 보인 후에는 개선이 많이 멈추지만 **V-LSM**의 경우 꾸준히 모델이 개선되는 모습을 보인다. 또한 **V-LSM**은 기하학적 접근을 사용하여 메모리를 적게 사용한다.(appendix 참고)
+
+- **Generalzation**   
+
+figure 4는 **LSM**이 얼마나 보이지 않는 데이터에 대해 얼마나 일반화가 되었는지를 보여줍니다. **3D-R2n2 w/pose**의 경우 더 많은 view를 관찰할수록 성능 차이가 그대로이나 **V-LSM**의 경우 성능 차이가 줄어듦을 확인할 수 있습니다. 이를 통해 **V-LSM**의 경우 view에 따른 일반화가 잘 되었다고 확인할 수 있습니다.
+
+- **Multi-view Depth Map Prediction**   
+
+![experiment2-2](/post_images/Multi-View-stereo-machine/experiment2-2.PNG "experiment2-2")   
+
+figure 5에서는 Depth LSM의 결과를 보여줍니다. 모든 view에 대해 일관적인 geometry를 예측합니다.
+
+- **Comparision to Plane Swepping**   
+
 ![experiment3](/post_images/Multi-View-stereo-machine/experiment3.PNG "experiment3")
+
+figure 6는 view depths maps당 unprojected point clouds를 보여줍니다. PS보다 D-LSM이 더 깨끗한 point clouds를 생성함을 확인할 수 있습니다. (자세한 결과는 appendix를 참고)
 
 
 ## 5. Discussion
 <hr>
 
+- 한계점     
+grid resolution이 ${32^3}$으로 낮습니다.
+- future works   
+적절한 global grid representation을 찾기위해 더욱 일반적인 기하학을 적용할 예정 (ex) global euclidean grid가 아닌 camera frustum) 
+
 ## 6. summary
 <hr>
+
+본 모델은 view에 대한 2D image를 기반으로 3D world로 reconstruction을 하는 모델입니다.   
+이러한 모델로는 논문에서도 비교대상으로 나왔던 3D-R2N2가 있었습니다. LSM의 경우 3D-R2N2에서의 GRU를 차용하여 view를 결합하여 3D world data로 바꾸었다는 점은 동일합니다. 하지만 3D-R2N2에서와 다르게 camera pose를 이용하여 view에 대한 정보를 더욱 줌에 따라 모델을 개선하였습니다. 하지만 이러한 camera pose에 대한 정보를 얻어야 하는 불편함이 아직 존재합니다.    
+이러한 불편함을 개선하고 더 나은 성능을 보인 모델로는 Pix2Vox 모델이 있습니다. 다음 포스팅에서는 이 모델에 대한 리뷰를 진행하겠습니다.
