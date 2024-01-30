@@ -29,8 +29,6 @@ Multi-view stereopsis(MVS)는 주어진 이미지들과 카메라 정보가 있�
 
 ![model-structure](/post_images/Multi-View-stereo-machine/model-structure.PNG "LSM 모델 구조")   
 
-![unprojection](/post_images/Multi-View-stereo-machine/backprojection.PNG "unprojection")
-
 먼저 dense features를 image space에서 계산합니다. 그리고 이러한 특징들은 camera pose를 기반으로 matching volume으로 변환됩니다. 이 과정에서 unprojection을 통해 volume으로 변환됩니다. 이 matching volume의 optimum(최적값)dms 3D volume/surface/dispartiy maps의 추정치로 제공됩니다.
 
 본 모델은 figure 1과 같은 과정을 따릅니다. 1. 입력이미지 ${I_i}$ 는 먼저 image encoder를 통해 처리됩니다. 이는 각 이미지에 대해 하나의 dense feature maps ${F_i}$ 를 생성합니다  2. 그런 다음 features는 camera pose ${P_i}$ 를 통한 unprojection을 통해 3D feature grids ${G_i}$ 를 생성합니다. 이 unprojection 작업은 features를 epipola line을 따라 정렬하여 효율적인 local matching이 가능하게 합니다. 3. 이러한 matching은 neural network를 통해 모델링되며 이 network는 unprojection된 grid를 순차적으로 처리하여 local matching costs인 ${G^p}$ 를 생성합니다. 이 cost volume은 일반적으로 noisy하므로 이를 smooth하게 처리해야합니다. 4. 이를 위하여 본 논문에서는 feedforward 3d convolution-deconvolution cnn사용을 제안합니다. 이 cnn은 $G^p$ 는 smoothed 3D grid $G^0$로 변환합니다. 5. 원하는 출력에 따라 최종 grid를 volumetric occupancy map 또는 다시 2d feature maps ${O_i}$ 로 투영합니다. 이러한 2D maps은 이후 view depth/disparity map과 같은 모양에 대한 view specific representation으로 매핑됩니다.    
@@ -39,9 +37,15 @@ Multi-view stereopsis(MVS)는 주어진 이미지들과 카메라 정보가 있�
 
 이 LSM에 대한 변형으로 volume occupancy maps을 생성하는 Voxel LSM, 입력 이미지당 depth map(Depth LSM)을 출력하는 것을 제시하였습니다.
 
-1) 2D Image Encoder
+1) 2D Image Encoder    
+stereo algorithm 의 첫 step은 이미지들을 매칭하기위한 좋은 features를 계산하는 것이다. 입력이미지 ${I_i}$ 는 encoder를 거쳐 2D space의 dense feature maps ${F_i}$가 된다. 이 features는 camera parameters를 이용한 unprojection module을 통과하여 metric 3D space이 된다.
 
-2) Differentiable Unprojection
+![unprojection](/post_images/Multi-View-stereo-machine/backprojection.PNG "unprojection")
+
+2) Differentiable Unprojection   
+unprojection 과정의 목표는 2D image frame의 정보를 3D world frame의 정보로 옮기는 것이다. 2D point ${p}$ ,feature 표현 ${F(p)}$, 및 global 3D grid 표현이 주어졌을때 p에 대한 viewing ray를 따라 ${p}$위치의 metric 3D grid에 ${F(p)}$를 복제합니다.(Figure 2에 자세히 나와있음) 카메라 자체 특성인 내부 camera matrix ${K}$ 와 카메라 외부 특성인 외부 camera matrix ${[R|t]}$가 특정되었을 때 unprojection 과정은 이 camera pose를 이용하여 world에서의 viewing rays를 추적하고 image features를 3D world grid의 voxels로 복사합니다. viewing rays를 해석적으로 추적하는 대신 3D grid의 블록 중심 ${X_w^k}$이 주어졌을때, 각 블록의 특징을 계산합니다. 이를 위해 camera projection equations ${p_k' = K[R|t]X_w^k}$를 이용하여 블록을 이미지 공간으로 투영합니다. 이때 ${p_k'}$는 continuous한 양이지만 ${F}$는 이산적인 2D 위치에서 정의됩니다. 따라서 이산 grid에서 샘플링하기 위해 differentiable bilinear sampling을 사용합니다. 이로서 ${X_w^k}$에서 특징을 얻습니다.   
+이를 통해 epipolar 제약 조건을 쉽게 강제하게 됩니다. 따라서 이러한 unprojected grid에서의 추가적인 처리는 이미지 공간에서의 특징 매칭을 위한 장거리 이미지 연결의 필요성을 줄여주어 이미지 연결이 필요없게 됩니다. 또한 feature maps에서 bilinearly sampling하는 것은 3D grid의 voxel이 카메라의 거리에 대한 영향을 감소시켜줍니다. 본 논문에서의 접근 방식을 통해 모든 voxel은 "soft" 특징을 가지게 되어 feature grids ${G^f}$를 부드럽고 stable gradient를 가지도록 합니다. 이를 통해 네트위크가 기하학을 학습할 필요가 없게 됩니다. 이 과정은 이미지 광간의 특징맵 ${F_i}$을 metric 3D space에 있는 feature grid ${G^f_i}$ 로 다시 투영할 때 사용됩니다.    
+single image prediction의 경우 ray에 기하학적 특징(depth and ray direction)을 추가하여 예측을 용이하게 합니다.
 
 3) Recurrent Grid Fusion
 
