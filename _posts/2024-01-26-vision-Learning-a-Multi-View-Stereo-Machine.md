@@ -108,7 +108,7 @@ world grid resolution : 32x32x32
 
 - **limitation**     
 grid resolution이 ${32^3}$으로 낮습니다.
-- **future works  ** 
+- **future works**    
 적절한 global grid representation을 찾기위해 더욱 일반적인 기하학을 적용할 예정 (ex) global euclidean grid가 아닌 camera frustum) 
 
 ## 6. summary
