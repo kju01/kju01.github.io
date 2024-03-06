@@ -31,6 +31,35 @@ def __getitem__(self, index):
     label = torch.zeros(32,32,32, dtype=torch.long)
     try:
         labeltmp = self.loader_label(os.path.join(self.label_root, self.cat_model_list[index][0], self.cat_model_list[index][1], 'model.binvox'))
+        label = torch.from_numpy(labeltmp.data.astype('uint8')).long()
+        for view in range(self.cur_n_views):
+            imgtmp = self.loader_image(os.path.join(self.image_root, self.cat_model_list[index][0], self.cat_model_list[index][1], 'rendering', filenames[view]))                
+            if self.transform is not None:
+                imgs[view,:,:,:] = self.transform(imgtmp)
+            
+    except:
+        print('PROBLEM WITH LOADING A BATCH')
+        pass
+
+    return {'imgs': imgs, 'label': label}
+```
+alex-golts/pytorch-3D-R2N2/dataset.py 내의 코드를 들고 옴. [github](https://github.com/alex-golts/Pytorch-3D-R2N2)
+
+일반적으로 shapenet 데이터를 불러오는 과정에서는 dict구조를 통해 받아오는 경우가 많다. 2D 데이터와 다르게 camera pose, light 등등 추가적인 정보를 사용할 수도 있기 때문에 dict 구조가 편리하다.   
+
+```
+def __getitem__(self, index):  
+    # index indicates the model id (model id's are randomly shuffled)
+    if self.cur_index_within_batch == self.batch_size:
+        self.cur_index_within_batch = 0
+        self.cur_n_views = random.randint(self.min_views, self.max_views+1)
+    self.cur_index_within_batch += 1
+    # the specific images within the chosen model are chosen at random
+    filenames = random.choice(self.im_list[index], self.cur_n_views, replace=False)
+    imgs = torch.zeros(self.cur_n_views, 3, 128, 128)  
+    label = torch.zeros(32,32,32, dtype=torch.long)
+    try:
+        labeltmp = self.loader_label(os.path.join(self.label_root, self.cat_model_list[index][0], self.cat_model_list[index][1], 'model.binvox'))
         category = self.cat_model_list[index][0]
         label = torch.from_numpy(labeltmp.data.astype('uint8')).long()
         for view in range(self.cur_n_views):
@@ -43,6 +72,4 @@ def __getitem__(self, index):
         pass
 
     return {'imgs': imgs, 'label': label, 'category': category}
-
-    #return {'imgs': imgs, 'label': label}
 ```
