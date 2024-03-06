@@ -1,5 +1,5 @@
 ---
-title: shapenet dataset(작성중)
+title: shapenet dataset
 author: kju
 layout: post
 use_math: True
@@ -38,7 +38,7 @@ Shapenet
 
 image data에서는 label이 1이면 cat, 2이면 dog라고 하듯이 label안에 사진이 어떤 category인지 같이 표현되었으나, shapenet에서는 이것이 분리되어 있다.
 
-category의 경우 사진과 같이 넘버링이 되어 있으며 이런 넘버링이 어떤 카테고리인지는 이 링크(https://gist.github.com/tejaskhot/15ae62827d6e43b91a4b0c5c850c168e)에 가면 자세히 나와있다.
+category의 경우 사진과 같이 넘버링이 되어 있으며 이런 넘버링이 어떤 카테고리인지는 이 링크[https://gist.github.com/tejaskhot/15ae62827d6e43b91a4b0c5c850c168e](https://gist.github.com/tejaskhot/15ae62827d6e43b91a4b0c5c850c168e)에 가면 자세히 나와있다.
 예를 들어 02691156은 airplane이라는 category를 가진 데이터들이 들어있는 폴더이다.
 
 ![세부 category](/post_images/shapenet/renderingfolder2.PNG "세부category")
