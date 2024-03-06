@@ -97,7 +97,7 @@ alex-golts/pytorch-3D-R2N2/dataset.py 내의 코드를 들고 옴. [github](http
 'imgs' key의 경우 일반적인 image data에서 view라는 차원이 추가되어있다. 즉 [view, channel, height, width] 로 4차원 data로 되어있다.     
 view의 경우 보통 dataloader과정에서 몇개의 view를 임의로 뽑을지 지정한다.
 
-코드를 보면 'label' 이라는 key가 있으니 이를 이용하면 될 것 같지만 10 line을 보면 알 수 있듯이 (32,32,32) tensor이다. 2D data에서는 한 자리 숫자여서 구별이 가능했지만 shapenet의 label로는 구별이 어렵다. 또한 label의 경우 세부 category에 대한 정보를 담고 있기 때문에 더욱 category 구별이 불가능하다.
+코드를 보면 'label' 이라는 key가 있으니 이를 이용하면 될 것 같지만 56 line을 보면 알 수 있듯이 (32,32,32) tensor이다. 2D data에서는 한 자리 숫자여서 구별이 가능했지만 shapenet의 label로는 구별이 어렵다. 또한 label의 경우 세부 category에 대한 정보를 담고 있기 때문에 더욱 category 구별이 불가능하다.
 
 ### dataload 과정에서 category 정보를 같이 받기. (getitem 함수 수정)
 
