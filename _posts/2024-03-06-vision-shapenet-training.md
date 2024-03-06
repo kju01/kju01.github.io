@@ -10,4 +10,10 @@ categories:
 3D data에 관한 논문의 결과들을 읽어보면 다음과 같은 표를 볼 수 있다.
 
 ![table](/post_images/shapenet_category/category_table.PNG "pix2vox_table")
-[reference - pix2vox](https://arxiv.org/abs/1901.11153)
+[reference - pix2vox](https://arxiv.org/abs/1901.11153)   
+위와 같이 category별로 IoU를 계산해 비교한다.   
+2D dataset이라면 label별로 구분을 해서 나누면 됐지만 shapenet의 경우 category와 label이 다르기때문에 다른 방법이 필요하다.
+
+shapenet의 구조에 대해서는 이 포스팅 참고 [shapenet dataset](https://kju01.github.io/deep%20learning%20(vision)/2024/02/27/vision-shapenet.html)
+
+### dataloader 과정에서 받아오기

@@ -45,7 +45,7 @@ category의 경우 사진과 같이 넘버링이 되어 있으며 이런 넘버�
 ![세부 category](/post_images/shapenet/renderingfolder2.PNG "세부category")
 
 예시로 02691156폴더에 들어가면 위와 같은 폴더명으로 된 폴더들이 들어있다.   
-이 폴더들은 같은 category이지만 다른 모양을 가진(ex) 둥근 table과 네모난 table)   
+이 폴더들은 같은 category이지만 다른 모양을 가진(ex) 둥근 table과 네모난 table) 데이터를 구분하기 위함이다.   
 이 폴더부터는 ShapeNetRendering 폴더와 ShapeNetVox32와 다른 파일이 들어있다.
 
 ### ShapeNetRendering
