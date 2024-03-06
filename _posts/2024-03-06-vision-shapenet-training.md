@@ -22,6 +22,63 @@ shapenet의 구조에 대해서는 이 포스팅 참고 [shapenet dataset](https
 ### Shapenet dataloader 구조
 
 ```python
+import os
+import os.path
+
+import torch
+import torch.utils.data as data
+from PIL import Image
+from numpy import random
+from binvox_rw import read_as_3d_array
+
+IMG_EXTENSIONS = [
+    '.jpg',
+    '.JPG',
+    '.jpeg',
+    '.JPEG',
+    '.png',
+    '.PNG',
+    '.ppm',
+    '.PPM',
+    '.bmp',
+    '.BMP',
+]
+
+
+def is_image_file(filename):
+    return any(filename.endswith(extension) for extension in IMG_EXTENSIONS)
+
+
+def loader_image(path):
+    return Image.open(path).convert('RGB')
+    
+def loader_label(path):
+    with open(path, 'rb') as f:
+        voxel = read_as_3d_array(f)
+    return voxel
+
+
+def portion_models(dataset_portion, category_path):
+    '''
+    Load category, model names from a shapenet dataset.
+    '''
+
+    def model_names(model_path):
+        """ Return model names"""
+        model_dir_list = os.listdir(model_path)
+        model_names = [name for name in model_dir_list
+                       if os.path.isdir(os.path.join(model_path, name))]
+        return sorted(model_names)
+
+    model_path = os.path.join(category_path)
+    models = model_names(model_path)
+    num_models = len(models)
+
+    portioned_models = models[int(num_models * dataset_portion[0]):int(num_models * dataset_portion[1])]
+
+    return portioned_models
+
+
 class Dataset(data.Dataset):
 
     def __init__(self, root, transform=None, loader_image=loader_image, loader_label=loader_label, model_portion=[0, 0.8], min_views=1, max_views=5, batch_size=24):
