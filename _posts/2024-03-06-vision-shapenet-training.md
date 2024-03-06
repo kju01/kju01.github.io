@@ -16,9 +16,9 @@ categories:
 
 shapenet의 구조에 대해서는 이 포스팅 참고 [shapenet dataset](https://kju01.github.io/deep%20learning%20(vision)/2024/02/27/vision-shapenet.html)
 
-### dataloader 과정에서 받아오기
+### Shapenet dataloader 구조
 
-```
+```python
 def __getitem__(self, index):  
     # index indicates the model id (model id's are randomly shuffled)
     if self.cur_index_within_batch == self.batch_size:
@@ -47,7 +47,11 @@ alex-golts/pytorch-3D-R2N2/dataset.py 내의 코드를 들고 옴. [github](http
 
 일반적으로 shapenet 데이터를 불러오는 과정에서는 dict구조를 통해 받아오는 경우가 많다. 2D 데이터와 다르게 camera pose, light 등등 추가적인 정보를 사용할 수도 있기 때문에 dict 구조가 편리하다.   
 
-```
+코드를 보면 'label' 이라는 key가 있으니 이를 이용하면 될 것 같지만 10 line을 보면 알 수 있듯이 (32,32,32) tensor이다. 2D data에서는 한 자리 숫자여서 구별이 가능했지만 shapenet의 label로는 구별이 어렵다. 또한 label의 경우 세부 category에 대한 정보를 담고 있기 때문에 더욱 category 구별이 불가능하다.
+
+### dataload 과정에서 category 정보를 같이 받기.
+
+```python
 def __getitem__(self, index):  
     # index indicates the model id (model id's are randomly shuffled)
     if self.cur_index_within_batch == self.batch_size:
@@ -73,3 +77,5 @@ def __getitem__(self, index):
 
     return {'imgs': imgs, 'label': label, 'category': category}
 ```
+
+나는 이러한 문제를
