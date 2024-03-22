@@ -7,7 +7,7 @@ use_math: True
 categories:
  - deep learning (vision)
 ---
-### summary
+### summary    
 본 논문은 2D 이미지들을 모아 3D로 복원하는 multi-view base의 모델에 관한 연구이다.    
 main idea는 1D data를 2D로 복원하는 unprojection것과 같이 2D data를 3D로 unprojection하는 부분을 설계함으로서 3D reconstruction을 하는 것이다.
 
