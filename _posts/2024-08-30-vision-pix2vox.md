@@ -1,5 +1,5 @@
 ---
-title: Pix2Vox review (작성중)
+title: Pix2Vox review
 author: kju
 layout: post
 categories: 
