@@ -26,8 +26,8 @@ categories:
 #### 단 로봇의 다리는 총 4개 이상이여야 함. (multi-legged robot with a serial arm(number of legs >= 4))
 <hr>
 
-![parallel](/post_images/로봇기구학텀프/parallel.png)
-(출처 : wikipedia)
+![parallel](/post_images/로봇기구학텀프/parallel.png)    
+(출처 : wikipedia)     
 대표적인 parallel manipulator 구조를 이용하였습니다.
 
 #### 바닥은 특정 파형으로 진동하는 상태
