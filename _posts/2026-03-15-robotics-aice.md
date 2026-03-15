@@ -4,7 +4,7 @@ author: kju
 layout: post
 use_math: True
 categories: 
- - robotics
+ - AI
 
 ---
 
