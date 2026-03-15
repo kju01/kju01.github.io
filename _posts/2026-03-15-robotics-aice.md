@@ -70,7 +70,7 @@ categories:
 ### 결과 및 최종 소감
 <hr>
 
-![Jupyter Shortcut Issue](../post_images/aice/aice합격.png)
+![Jupyter Shortcut Issue](/post_images/aice/aice합격.png)
 
 시험 결과에서 감점된 부분은 아마 모의고사에서 접하지 못했던 데이터 전처리 파트였던 것 같습니다. 저는 대학원 과정에서 딥러닝을 주로 다루다 보니 Layer 설계는 익숙했지만, 머신러닝 파트는 학부 수업 수준에서 얕게 공부했기에 오히려 이 부분에 대한 보충 학습이 더 필요했습니다.
 <br>
