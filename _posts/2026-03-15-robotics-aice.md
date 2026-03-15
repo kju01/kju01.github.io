@@ -1,5 +1,5 @@
 ---
-title: AICE Association 합격 후기 : 비전공자 석사생의 준비 방법과 팁
+title: AICE Association 합격 후기
 author: kju
 layout: post
 use_math: True
