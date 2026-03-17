@@ -1,5 +1,5 @@
 ---
-title: AICE Association 합격 후기
+title: AICE Association 합격 후기(2026년도2월시험)
 author: kju
 layout: post
 use_math: True
