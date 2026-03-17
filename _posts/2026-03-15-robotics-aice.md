@@ -28,7 +28,7 @@ categories:
 다행히 아래 링크를 통해 2025년 버전 교재용 코드를 오픈소스로 내려받을 수 있었습니다.
 <br>
 
-![test](/post_images/aice/모의고사.png)
+![AICE Association 실전 모의고사 코드 자료 리스트](/post_images/aice/모의고사.png)
 
 [(AICE Association 2025년 버전 교재용 코드)](https://www.epasskorea.com/Board/dataroom.asp?link_idx=13644&Cate_IDX=132722&nCate_IDX=13272201&LEC_IDX=&TEA_IDX=&bg_idx=22&bcs_idx=538&intBc_idx=65&type=C&page=1&searchoption=&searchstring=&bmode=detail&intB_idx=5627)
 <br>
@@ -43,7 +43,7 @@ categories:
 #### Jupyter 환경 연습
 <hr>
 
-![test](/post_images/aice/주피터.png)
+![AICE 공식 홈페이지 실습 환경 설정](/post_images/aice/주피터.png)
 저는 AICE에서 제공하는 Jupyter 서버에 직접 파일을 업로드하여 연습했습니다. 로컬 환경에 별도의 Jupyter 설정을 하지 않은 분들이라면 서버를 활용하는 것이 실제 시험 환경과도 유사하여 큰 도움이 될 것 같습니다.(로그인 후 AICE 실습 -> 나의 프로젝트)
 <br>
 
@@ -68,7 +68,7 @@ categories:
 #### Jupyter Notebook 단축키 주의사항
 <hr>
 
-![test](/post_images/aice/notebook-ui.webp)
+![AICE 시험용 Jupyter Notebook UI 구성](/post_images/aice/notebook-ui.webp)
 시험 환경의 Jupyter Notebook은 일반적인 인터페이스와 달리 상단 메뉴 버튼들이 생략된 상태입니다. (상단에 있는 저장버튼부터 code나 markdown으로 셀을 바꾸는 항목이 없다)
 이로 인해 작업 중 실수로 단축키가 눌려 **Code 셀이 Markdown 셀로 바뀌는 상황**이 발생했습니다.
 <br>
@@ -81,7 +81,7 @@ categories:
 ### 결과 및 최종 소감
 <hr>
 
-![Jupyter Shortcut Issue](/post_images/aice/aice합격.png)
+![AICE Association 시험 합격 인증](/post_images/aice/aice합격.png)
 
 시험 결과에서 감점된 부분은 아마 모의고사에서 접하지 못했던 데이터 전처리 파트였던 것 같습니다. 저는 대학원 과정에서 딥러닝을 주로 다루다 보니 데이터 분석이나 모델링파트는 익숙했지만, 머신러닝 파트는 학교 수업 수준에서 얕게 공부했기에 오히려 이 부분에 대한 보충 학습이 더 필요했습니다. 사실 요즘은 수업에서도 머신러닝 파트는 빠르게 넘어가고 최신 모델 세미나를 주로 하는 분위기다보니 더 얕게 알고 있었습니다.
 <br>
