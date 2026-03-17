@@ -1,8 +1,10 @@
 ---
-title: AICE Association 합격 후기(2026년도2월시험)
+title: AICE Association 합격 후기(2026년도2월시험, 비전공자, 책 구매 없이 모의고사 풀기)
 author: kju
 layout: post
 use_math: True
+description: "AICE Association 자격증 비전공자 합격 후기입니다. 2025년 교재용 모의고사 코드 다운로드 링크, Mac 환경 응시 팁, Jupyter Notebook 단축키 이슈 해결 방법을 공유합니다."
+keywords: "AICE, AICE Association, AICE 후기, AICE 모의고사, 데이터 분석 자격증, 비전공자 AI, 머신러닝 시험, AICE Association 모의고사"
 categories: 
  - AI
 
